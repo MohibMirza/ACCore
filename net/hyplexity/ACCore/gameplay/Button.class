@@ -1,0 +1,27 @@
+package net.hyplexity.ACCore.gameplay;
+
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.util.Vector;
+
+public class Button
+  implements Listener
+{
+  @EventHandler
+  public void onButtonClimb(PlayerInteractEvent event)
+  {
+    Player p = event.getPlayer();
+    if (event.getAction() == Action.RIGHT_CLICK_BLOCK)
+    {
+      Block clicked = event.getClickedBlock();
+      if (clicked.getType() == Material.STONE_BUTTON) {
+        p.setVelocity(new Vector(p.getVelocity().getX(), 0.7D, p.getVelocity().getZ()));
+      }
+    }
+  }
+}
