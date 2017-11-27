@@ -1,0 +1,27 @@
+package net.hyplexity.ACCore;
+
+import net.hyplexity.ACCore.gameplay.Button;
+import net.hyplexity.ACCore.gameplay.Hook;
+import net.hyplexity.ACCore.gameplay.Roll;
+import org.bukkit.Bukkit;
+import org.bukkit.Server;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Main
+  extends JavaPlugin
+  implements Listener
+{
+  public void onEnable()
+  {
+    Bukkit.getPluginManager().registerEvents(this, this);
+    PluginManager pm = getServer().getPluginManager();
+    pm.registerEvents(new Roll(), this);
+    pm.registerEvents(new Hook(), this);
+    pm.registerEvents(new Button(), this);
+    pm.registerEvents(new Menu(), this);
+  }
+  
+  public void onDisable() {}
+}
