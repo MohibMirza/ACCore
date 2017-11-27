@@ -1,0 +1,40 @@
+package net.hyplexity.ACCore.gameplay;
+
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+
+public class Roll
+  implements Listener
+{
+  @EventHandler
+  public void onFall(EntityDamageEvent fall)
+  {
+    if ((fall.getEntity() instanceof Player))
+    {
+      Player p = (Player)fall.getEntity();
+      Location loc = p.getLocation();
+      loc.setY(loc.getY() - 2.0D);
+      int block = loc.getWorld().getBlockTypeIdAt(loc);
+      if (fall.getCause() == EntityDamageEvent.DamageCause.FALL) {
+        if (block == 170)
+        {
+          fall.setCancelled(true);
+          p.sendMessage(ChatColor.BLUE + "You landed safely in a hay bale.");
+        }
+        else if (p.isSneaking())
+        {
+          double x = (int)(Math.random() * 75.0D);
+          x /= 100.0D;
+          fall.setDamage(fall.getDamage() - fall.getDamage() * x);
+          p.sendMessage(ChatColor.BLUE + "You rolled and got " + ChatColor.GOLD + x * 100.0D + ChatColor.BLUE + "% less damage");
+        }
+      }
+    }
+  }
+}
