@@ -1,0 +1,2 @@
+# ACCore
+ACCore is a multiplayer Minecraft plugin that allows players to climb vertical surfaces and roll on the ground. It utilizes the button and hook objects in the Minecraft libraries as an initiator for the code to run. Right clicking a button or hook will launch you into the air allowing you to climb a vertical surface.  Falling from a height will reduce a portion of damage based on the random number generated on each roll.
