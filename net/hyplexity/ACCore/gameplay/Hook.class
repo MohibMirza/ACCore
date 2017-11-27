@@ -1,0 +1,24 @@
+package net.hyplexity.ACCore.gameplay;
+
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.util.Vector;
+
+public class Hook
+  implements Listener
+{
+  @EventHandler
+  public void onHook(PlayerInteractEvent e)
+  {
+    Player p = e.getPlayer();
+    if ((e.getAction() == Action.RIGHT_CLICK_BLOCK) && 
+      (e.getClickedBlock().getType() == Material.TRIPWIRE_HOOK)) {
+      p.setVelocity(new Vector(p.getVelocity().getX(), 1.3D, p.getVelocity().getZ()));
+    }
+  }
+}
