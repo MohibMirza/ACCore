@@ -1,0 +1,57 @@
+package net.hyplexity.ACCore;
+
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+public class Menu
+  implements Listener
+{
+  @EventHandler
+  public void onVillager(PlayerInteractEvent e)
+  {
+    Player player = e.getPlayer();
+    Inventory inv = Bukkit.createInventory(null, 27, ChatColor.RED + "Assassins Shop");
+    ItemStack spawnItem = nameItem(new ItemStack(Material.IRON_SWORD), ChatColor.AQUA + "Weapons");
+    inv.setItem(4, spawnItem);
+  }
+  
+  private ItemStack nameItem(ItemStack item, String name)
+  {
+    ItemMeta meta = item.getItemMeta();
+    meta.setDisplayName(name);
+    item.setItemMeta(meta);
+    return item;
+  }
+  
+  private ItemStack nameItem(Material item, String name)
+  {
+    return nameItem(new ItemStack(item), name);
+  }
+  
+  public void onMenu(InventoryClickEvent event)
+  {
+    (event.getWhoClicked() instanceof Player);
+    
+    Inventory in = event.getInventory();
+    if (in.getTitle().equalsIgnoreCase("Assassins Shop"))
+    {
+      Player player = (Player)event.getWhoClicked();
+      ItemStack item = event.getCurrentItem();
+      if (item.getType() == Material.IRON_SWORD)
+      {
+        event.setCancelled(true);
+        player.closeInventory();
+        Inventory localInventory1 = Bukkit.createInventory(null, 27, ChatColor.RED + "Weapons");
+      }
+    }
+  }
+}
